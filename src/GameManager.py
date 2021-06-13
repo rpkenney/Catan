@@ -1,16 +1,11 @@
 import Player
-import Corner
-import Road
-import networkx as nx
-import matplotlib.pyplot as plt
+import Tile
 
-players = Player.generate_players(['Noah', 'Robert'])
+resources = ['b','r','l','s','w']
+resource_amounts = [3,3,4,4,4]
 
-corners = Corner.generate_corners()
+players = Player.generate_players(['Noah', 'Robert'], resources)
 
-roads = Road.load_roads()
+Tile.generate_tiles(resources, resource_amounts)
 
-game_map = nx.Graph()
-game_map.add_nodes_from(corners)
-for i in range(roads.shape[0]):
-    game_map.add_edge(roads['node1'][i], roads['node2'][i])
+
