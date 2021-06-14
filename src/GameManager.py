@@ -10,6 +10,3 @@ players = Player.generate_players(['Noah', 'Robert'], resources)
 tiles = Tile.generate_tiles(resources, resource_amounts)
 
 gui = GameGUI.GameGUI(tiles)
-
-
-
