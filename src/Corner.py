@@ -1,6 +1,3 @@
-def generate_corners():
-    return list(range(1, 54))
-
 """
 Generate a map that is in the shape of a regular hexagon with n tiles on each side
 
@@ -25,12 +22,10 @@ def generate_regular_hexmap(dim):
             notCorners.append(cols*j-i) #Top right
             notCorners.append(cols*(rows-i)+j-1) #Bottom left
             notCorners.append(cols*(rows-j+1)-i) #Bottom right
-            
-    #notCorners = [0,1,9,10,11,21,44,54,55,56,64,65]   #Corners that should be removed from dim=3 map
     
     corners = [x for x in corners if x not in notCorners]
     
-    return corners
+    return tuple(corners)
 
 """
 parameters
@@ -57,7 +52,7 @@ def get_neighbor(corner, trueCorners, dim):
     
     neighbors = [x for x in neighbors if x in trueCorners]
     
-    return tuple(neighbors)
+    return neighbors
         
     
     

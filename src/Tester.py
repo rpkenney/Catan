@@ -6,7 +6,6 @@ import Corner
 
 
 dim = 3
-width = dim*4-1
 
 true = Corner.generate_regular_hexmap(dim)
 
@@ -26,10 +25,10 @@ resource_amounts = [3,3,4,4,4]
 names = ['Noah', 'Robert']
 players = Player.generate_players(names, resources)
 
-tiles = Tile.generate_tiles(resources, resource_amounts, true, width)
+tiles = Tile.generate_tiles(resources, resource_amounts, true, dim)
 
 print(len(tiles))
 print(tiles)
 
-#gui = GameGUI.GameGUI(tiles)
+gui = GameGUI.GameGUI(tiles)
 

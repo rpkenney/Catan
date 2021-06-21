@@ -52,8 +52,8 @@ class GameGUI:
         self.tile_graphics = []
         c= 0
         for tile in self.tiles:
-            res = tile[0]
-            num = tile[1]
+            res = tile[1]
+            num = tile[2]
             col = None
             if res == 'b':
                 col = '#c4290e'
@@ -80,4 +80,4 @@ class GameGUI:
                 c += 1
                 
     def select_tile(self, idx):
-        print(self.tiles[idx][0])
+        print(self.tiles[idx][1])
