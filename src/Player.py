@@ -14,6 +14,7 @@ def generate_players(names, resources):
     players = []
     for name in names:
         player = {'name':name,'vp':0,'sm':5,'rd':15,'ct':4,
-                  'res':dict.fromkeys(resources, 0),'dc':[]}
+                  'res':dict.fromkeys(resources, 0),'dc':[],
+                  'smCorn':[], 'ctCorn':[]}
         players.append(player)       
     return players
