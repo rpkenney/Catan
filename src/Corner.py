@@ -36,7 +36,7 @@ parameters
 return
     neighbors - tuple of neighboring corners
 """
-def get_neighbor(corner, trueCorners, dim):
+def get_neighbors(corner, trueCorners, dim):
     width = 4 * dim - 1
     neighbors = []
     
