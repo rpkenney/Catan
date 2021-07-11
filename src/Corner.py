@@ -54,6 +54,16 @@ def get_neighbors(corner, trueCorners, dim):
     
     return neighbors
         
+def get_adjacent_tiles(corner, board, dim):
+    width = 4 * dim - 1
+    tiles = []
     
+    if corner%2 == 0:
+        tiles = [corner//2,corner//2-1,(corner-width)//2]
+    else:
+        tiles = [corner//2,(corner-width)//2,(corner-width)//2-1]
+    
+    return [x for x in tiles if x in board]
+
     
     

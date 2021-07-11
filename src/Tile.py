@@ -44,9 +44,11 @@ def generate_tiles(resources, resource_amounts,true_corners, dim):
     return sorted(tuple(board))
 
 
-def get_adjacent_corners(tileID, dim):
+def get_adjacent_corners(tileID, corners, dim):
     width = 4*dim - 1
-    return [tileID*2-1,tileID*2,tileID*2+1,tileID*2+width-1,tileID*2+width,tileID*2+width+1]
+    temp = [tileID*2-1,tileID*2,tileID*2+1,tileID*2+width-1,tileID*2+width,tileID*2+width+1]
+    
+    return [x for x in temp if x in corners]
     
     
     

@@ -4,16 +4,16 @@ import GameGUI
 import Dice
 import Corner
 import numpy as np
+from src.Corner import get_adjacent_tiles
 
-def build_board(names,dim):
-    
-    corns = Corner.generate_regular_hexmap(dim)
+def build_def_board(names):
     
     resources = ['b','r','l','s','w']
     resource_amounts = [3,3,4,4,4]
-
+    dim = 3
+    
+    corns = Corner.generate_regular_hexmap(dim)
     players = Player.generate_players(names, resources)
-
     tiles = Tile.generate_tiles(resources, resource_amounts, corns, dim)
     
     return (corns, tiles, players)
@@ -56,6 +56,10 @@ def start_game(game):
             if int(corner) in game[0] :
                 print("Valid corner choice")
                 invalid = False
+                """
+                adjTiles = get_adjacent_tiles(corner, game[1], 3)
+                for t in adjTiles:
+                    game[1]"""
             else:
                 print("Invalid Corner. Try again")
         
@@ -67,7 +71,6 @@ def start_game(game):
 
 #Script ---------------------------------------------------------
 
-n = int(input("What type of board do you want to play on?: "))
 numPlayers = int(input("How many people are playing?: "))
 players = []
 
@@ -75,13 +78,9 @@ for i in range(numPlayers):
     players.append(input("Who is player " + str(i+1) + "?: "))
 
 print(players)
-ctp = build_board(players, n)
+ctp = build_def_board(players)
 
 gui = GameGUI.GameGUI(ctp[1])
-
-print("Number of Corners: " + str(len(ctp[0])))
-print("Number of Tiles: " + str(len(ctp[1])))
-print("Number of Players: " + str(len(ctp[2])))
 
 ctp = start_game(ctp)
 
