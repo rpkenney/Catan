@@ -21,58 +21,63 @@ def generate_road_df(corners):
 
     return roads_df
 
-def get_longest_road(roads):
+def get_longest_road(corners, roads):
     longest = 0
     
-    for road in roads.index:
-        c = roads['c1'][road]
-        if roads['occupant'][road] != None:
-            get_road_length(c, roads)
+    for corner in range(len(corners)):
+        curr = get_road_length(corner, roads)
+        if curr > longest:
+            longest = curr
+            
+    return longest
+        
 
 def get_road_length(corner, roads):
     branch_lengths = []
     
-    c1 = roads[roads['c1'] == corner]
-    c2 = roads[roads['c2'] == corner] 
-    
-    branches = pd.concat([c1, c2])
-    branches = branches.index[branches['occupant'].notnull()]
+    branches = get_adj_roads(corner, roads).index
     
     for branch in branches:
-        branch_lengths.append(get_branch_length(corner, roads, None, branch))
+        branch_lengths.append(get_branch_length(corner, roads, start = branch))
     
     return sum(branch_lengths)
 
-def get_branch_length(corner, roads, uc, branch):
+def get_branch_length(corner, roads, used_corners = [], start = None):
     longest = 0
-     
-    if branch == None:
-        c1 = roads[roads['c1'] == corner]
-        c2 = roads[roads['c2'] == corner] 
-        connections = pd.concat([c1, c2])
-        connections = connections.index[connections['occupant'].notnull()]
+    
+    if start == None:
+        connections = get_adj_roads(corner, roads).index
     else:
-        connections = [branch]
+        connections = [start]
+
+    copy = used_corners.copy()
     
-    if uc == None:
-        uc = []
-    
-    copy = uc.copy()
-    
+    #base case is when length of connections is 0 so 0 is returned
     for connection in connections:
-        nc = roads['c1'][connection]
+        new_corner = roads['c1'][connection]
         if roads['c2'][connection] != corner:
-            nc = roads['c2'][connection]
-        if nc in uc:
+            new_corner = roads['c2'][connection]
+        if new_corner in used_corners:
             continue
-        uc.append(corner)
-        curr_len = get_branch_length(nc, roads, uc, None) + 1
+        used_corners.append(corner)
+        #recursive step
+        curr_len = get_branch_length(new_corner, roads, used_corners) + 1
         if curr_len > longest:
             longest = curr_len
-        uc = copy
+        used_corners = copy
+
     return longest
         
 
+def get_adj_roads(corner, roads, include_vacant = False, ignore_index = False):
+    c1 = roads[roads['c1'] == corner]
+    c2 = roads[roads['c2'] == corner] 
+    connections = pd.concat([c1, c2], ignore_index = ignore_index)
+    if not include_vacant:
+        connections = connections[connections['occupant'].notnull()]
+    
+    return connections
+    
 
 if __name__ == "__main__":
     roads = generate_road_df(Corner.generate_regular_hexmap(3))

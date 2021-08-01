@@ -13,4 +13,4 @@ roads['occupant'][1] = 'Robert'
 roads['occupant'][10] = 'Robert'
 roads['occupant'][11] = 'Robert'
 
-test_len = Road.get_road_length(2, roads)
+test_len = Road.get_longest_road(corns, roads)

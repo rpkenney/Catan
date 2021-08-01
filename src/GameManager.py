@@ -5,11 +5,10 @@ import Dice
 import Corner
 import numpy as np
 
-def build_def_board(names):
+def build_board(names, dim = 3):
     
     resources = ['b','r','l','s','w']
     resource_amounts = [3,3,4,4,4]
-    dim = 3
     
     corns = Corner.generate_regular_hexmap(dim)
     players = Player.generate_players(names, resources)
@@ -77,7 +76,7 @@ for i in range(numPlayers):
     players.append(input("Who is player " + str(i+1) + "?: "))
 
 print(players)
-ctp = build_def_board(players)
+ctp = build_board(players)
 
 gui = GameGUI.GameGUI(ctp[1])
 
