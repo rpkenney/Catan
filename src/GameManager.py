@@ -4,7 +4,6 @@ import GameGUI
 import Dice
 import Corner
 import numpy as np
-from src.Corner import get_adjacent_tiles
 
 def build_def_board(names):
     

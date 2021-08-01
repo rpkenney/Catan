@@ -25,8 +25,53 @@ def get_longest_road(roads):
     longest = 0
     
     for road in roads.index:
-        c1 = roads['c1'][road]
-        print(c1)
+        c = roads['c1'][road]
+        if roads['occupant'][road] != None:
+            get_road_length(c, roads)
+
+def get_road_length(corner, roads):
+    branch_lengths = []
+    
+    c1 = roads[roads['c1'] == corner]
+    c2 = roads[roads['c2'] == corner] 
+    
+    branches = pd.concat([c1, c2])
+    branches = branches.index[branches['occupant'].notnull()]
+    
+    for branch in branches:
+        branch_lengths.append(get_branch_length(corner, roads, None, branch))
+    
+    return sum(branch_lengths)
+
+def get_branch_length(corner, roads, uc, branch):
+    longest = 0
+     
+    if branch == None:
+        c1 = roads[roads['c1'] == corner]
+        c2 = roads[roads['c2'] == corner] 
+        connections = pd.concat([c1, c2])
+        connections = connections.index[connections['occupant'].notnull()]
+    else:
+        connections = [branch]
+    
+    if uc == None:
+        uc = []
+    
+    copy = uc.copy()
+    
+    for connection in connections:
+        nc = roads['c1'][connection]
+        if roads['c2'][connection] != corner:
+            nc = roads['c2'][connection]
+        if nc in uc:
+            continue
+        uc.append(corner)
+        curr_len = get_branch_length(nc, roads, uc, None) + 1
+        if curr_len > longest:
+            longest = curr_len
+        uc = copy
+    return longest
+        
 
 
 if __name__ == "__main__":
