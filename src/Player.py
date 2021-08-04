@@ -1,4 +1,4 @@
-def generate_players(names, resources):
+def generate_players(names, resources = ['b','r','l','s','w']):
     '''
     Generates a dataframe full of players with information such as their name, the number of buildings remaining,
     and the cards that they have

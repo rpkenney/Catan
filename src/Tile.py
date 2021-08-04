@@ -1,6 +1,9 @@
 import numpy as np
 
-def generate_tiles(resources, resource_amounts,true_corners, dim):
+def generate_tiles(resources = ['b','r','l','s','w'], resource_amounts = [3,3,4,4,4],
+                   true_corners = [2,3,4,5,6,7,8,12,13,14,15,16,17,18,19,20,22,23,24,
+                                   25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,
+                                   42,43,45,46,47,48,49,50,51,52,53,57,58,59,60,61,62,63], dim = 3):
     '''
     Generates a list of tuples, each representing the resource, and die value of a tile
 
@@ -44,7 +47,9 @@ def generate_tiles(resources, resource_amounts,true_corners, dim):
     return sorted(tuple(board))
 
 
-def get_adjacent_corners(tileID, corners, dim):
+def get_adjacent_corners(tileID, corners = [2,3,4,5,6,7,8,12,13,14,15,16,17,18,19,20,22,23,24,
+                                   25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,
+                                   42,43,45,46,47,48,49,50,51,52,53,57,58,59,60,61,62,63], dim = 3):
     width = 4*dim - 1
     temp = [tileID*2-1,tileID*2,tileID*2+1,tileID*2+width-1,tileID*2+width,tileID*2+width+1]
     

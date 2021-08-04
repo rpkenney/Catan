@@ -7,12 +7,9 @@ import numpy as np
 
 def build_board(names, dim = 3):
     
-    resources = ['b','r','l','s','w']
-    resource_amounts = [3,3,4,4,4]
-    
-    corns = Corner.generate_regular_hexmap(dim)
-    players = Player.generate_players(names, resources)
-    tiles = Tile.generate_tiles(resources, resource_amounts, corns, dim)
+    corns = Corner.generate_regular_hexmap()
+    players = Player.generate_players(names)
+    tiles = Tile.generate_tiles()
     
     return (corns, tiles, players)
     

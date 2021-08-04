@@ -8,7 +8,7 @@ return:
     corners - whitelist of corners that exist on the map
 """
 
-def generate_regular_hexmap(dim):
+def generate_regular_hexmap(dim = 3):
     
     rows = dim * 2
     cols = dim * 4 - 1
@@ -36,7 +36,9 @@ parameters
 return
     neighbors - tuple of neighboring corners
 """
-def get_neighbors(corner, trueCorners, dim):
+def get_neighbors(corner, trueCorners = [2,3,4,5,6,7,8,12,13,14,15,16,17,18,19,20,22,23,24,
+                                   25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,
+                                   42,43,45,46,47,48,49,50,51,52,53,57,58,59,60,61,62,63], dim = 3):
     width = 4 * dim - 1
     neighbors = []
     
@@ -54,7 +56,7 @@ def get_neighbors(corner, trueCorners, dim):
     
     return neighbors
         
-def get_adjacent_tiles(corner, board, dim):
+def get_adjacent_tiles(corner, board, dim = 3):
     width = 4 * dim - 1
     tiles = []
     
